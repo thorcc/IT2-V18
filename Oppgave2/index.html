@@ -6,7 +6,13 @@
     <title>Document</title>
 </head>
 <body>
-    <header></header>
+    <header>
+      <nav>
+          <a href="../Oppgave1/index.html">Hjem</a>
+          <a href="index.html">Bestill billetter</a>
+          <a href="../Oppgave3/index.html">Instrumentquiz</a>
+      </nav>
+    </header>
     <main>
         <div>
             <select id="selArrangement">
@@ -46,10 +52,10 @@
             }
             else if (antallBarn > 0){
                 melding += `${antallBarn} barn.`;
-            } 
+            }
             else if (antallVoksne>0){
                 melding += `${antallVoksne} voksne.`;
-            } 
+            }
             else {
                 infoDiv.innerHTML = "Du må bestille minst en bilett!";
             }
@@ -57,7 +63,7 @@
             // Beregner prisen
             let pris = (antallBarn * 50 + antallVoksne * 100);
 
-            
+
             let rabattMelding = "";
             // Sjekker rabatt
             if (totalBiletter >= 5) {
