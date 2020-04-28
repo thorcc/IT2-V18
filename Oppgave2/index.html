@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <header></header>
+    <main>
+        <div>
+            <select id="selArrangement">
+                <option value="">Velg arrangement</option>
+                <option value="Trondheim kammermusikkfestival: Fabelaktig formiddag">Trondheim kammermusikkfestival: Fabelaktig formiddag</option>
+                <option value="Spill opp!">Spill opp!</option>
+                <option value="Onsdagskonsert">Onsdagskonsert</option>
+                <option value="Juiogat: Joik for folk">Juiogat: Joik for folk</option>
+            </select>
+            <label for="inpAntallVoksne">Antall barn (100kr)</label>
+            <input required id="inpAntallVoksne" value="0" type="number" min="0">
+            <label for="inpAntallBarn">Antall barn (50kr)</label>
+            <input required id="inpAntallBarn" value="0" type="number" min="0">
+            <button id="btnBestill">Bestill</button>
+        </div>
+        <div id="divRes"></div>
+    </main>
+
+    <script>
+        const divRes = document.querySelector("#divRes");
+        const selArrangement = document.querySelector("#selArrangement");
+        const inpAntallVoksne = document.querySelector("#inpAntallVoksne");
+        const inpAntallBarn = document.querySelector("#inpAntallBarn");
+        const btnBestill = document.querySelector("#btnBestill");
+
+        btnBestill.onclick = function() {
+            let antallVoksne = Number(inpAntallVoksne.value);
+            let antallBarn = Number(inpAntallBarn.value);
+            let totalBiletter = antallVoksne+antallBarn;
+            let arrangement = selArrangement.value;
+
+
+            let melding = `Du har bestilt ${totalBiletter} biletter til ${arrangement}, `;
+
+            if (antallVoksne > 0 && antallBarn > 0){
+                melding += `${antallVoksne} voksne og ${antallBarn} barn.`;
+            }
+            else if (antallBarn > 0){
+                melding += `${antallBarn} barn.`;
+            } 
+            else if (antallVoksne>0){
+                melding += `${antallVoksne} voksne.`;
+            } 
+            else {
+                infoDiv.innerHTML = "Du må bestille minst en bilett!";
+            }
+
+            // Beregner prisen
+            let pris = (antallBarn * 50 + antallVoksne * 100);
+
+            
+            let rabattMelding = "";
+            // Sjekker rabatt
+            if (totalBiletter >= 5) {
+                pris *= 0.8;
+                rabattMelding = ", inklusive grupperabatt på 20%";
+            }
+
+            divRes.innerHTML = `${melding} Totalprisen er ${pris} kr${rabattMelding}.`;
+
+        }
+    </script>
+</body>
+</html>

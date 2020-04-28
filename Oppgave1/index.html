@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ringve musikkhistoriske museum</title>
+    <style>
+        header{
+            text-align: center;
+        }
+        #bildegalleri{
+            width: 60%;
+            margin: auto;
+        }
+        #imgGalleri{
+            width: 100%;
+            display: block;
+        }
+        .knapper{
+            display: flex;
+            justify-content: center;
+        }
+        footer{
+            position: absolute;
+            bottom: 0;
+            background-color: #f7f0ea;
+
+        }
+        .info{
+            display: flex;
+        }
+        #ikoner{
+            display: flex;
+            flex-direction: column;
+        }
+        #divTekst{
+
+        }
+
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Ringve musikkhistoriske museum</h1>
+        <nav>
+            <a href="../Oppgave2/index.html">Bestill billetter</a>
+        </nav>
+    </header>
+    <main>
+        <div id="bildegalleri">
+            <div class="knapper">
+                <button id="btnForrige">Forrige</button>
+                <button id="btnNeste">Neste</button>
+            </div>
+            <img id="imgGalleri">
+        </div>
+    </main>
+
+    <footer>
+        <div class="info">
+            <div id="ikoner">
+                <img onmouseover="visInfo('aapning')" onmouseout="fjernInfo()" src="ikoner/aapningstider.jpg">
+                <img onmouseover="visInfo('pris')" onmouseout="fjernInfo()" src="ikoner/priser.jpg">
+                <img onmouseover="visInfo('info')" onmouseout="fjernInfo()" src="ikoner/informasjon.jpg">
+            </div>
+            <div id="divTekst">
+
+            </div>
+        </div>
+    </footer>
+
+    <script>
+
+        // Kode for slideshow
+
+        const btnNeste = document.querySelector("#btnNeste");
+        const btnForrige = document.querySelector("#btnForrige");
+        const imgGalleri = document.querySelector("#imgGalleri");
+
+        const bilder = ["bilder/intro1.jpg","bilder/intro2.jpg","bilder/intro3.jpg","bilder/intro4.jpg"];
+        let bildeNr = 0;
+
+        imgGalleri.src = bilder[bildeNr];
+
+        btnNeste.onclick = function (){
+            bildeNr += 1;
+            if(bildeNr == bilder.length){
+                bildeNr = 0;
+            }
+            imgGalleri.src = bilder[bildeNr];
+        }
+
+        btnForrige.onclick = function (){
+            bildeNr -= 1;
+            if(bildeNr == 0){
+                bildeNr = bilder.length - 1;
+            }
+            imgGalleri.src = bilder[bildeNr];
+        }
+
+        // -----------------------
+
+        const divTekst = document.querySelector("#divTekst");
+
+        const infotekst = {
+            aapning: `
+                <h4>Åpningstider:</h4>
+                <p>Tirsdag – søndag 11.00-16.00</p>
+            `,
+            pris: `
+                <h4>Billetter:</h4>
+                <p>Voksen: 120 kr</p>
+                <p>Student/honnør: 100 kr</p>
+                <p>Barn (0-15 år): Gratis</p>
+
+            `,
+            info: `
+                <h4>Informasjon:</h4>
+                <p>Besøksadresse: Lade allé 60, 7041 Trondheim 73 87 02 80 post@ringve.no</p>
+                <p>Postadresse: Postboks 6289 Torgarden, 7489 Trondheim</p>    <p>Tirsdag – søndag 11.00-16.00</p>
+            `,
+        };
+
+        function visInfo(type){
+            divTekst.innerHTML = infotekst[type];
+            divTekst.style.margin = "1rem";
+        }
+        function fjernInfo(){
+            divTekst.innerHTML = "";
+            divTekst.style.margin = "0";
+        }
+
+    </script>
+</body>
+</html>
